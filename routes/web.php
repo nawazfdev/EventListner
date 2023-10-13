@@ -4,7 +4,6 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostCont;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,7 +30,20 @@ Route::middleware('auth')->group(function () {
 
 // Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostCont::class, 'store'])->name('posts.store');
+Route::get('/onetone', [PostCont::class, 'onetoone']);
+Route::get('/onetmany', [PostCont::class, 'onetomany']);
+Route::get('/manytone', [PostCont::class, 'manytomany']);
+
+
 
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/send-email', function(){
+
+$usermail='sardarnawaz122@gmail.com';
+dispatch(new App\Jobs\sendemailjob($usermail));
+dd('send email successfully');
+
+});

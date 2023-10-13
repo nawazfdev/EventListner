@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\PostEvent;
 use App\Models\post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +36,33 @@ class PostCont extends Controller
         
 event(new PostEvent($data));
         return back()->with('success', 'Post created successfully.');
+
+    }
+    public function onetoone(){
+
+        $user = User::find(1)->post; 
+
+        // $email=$user->email;
+dd($user);
+// dd($email);
+
+    }
+    public function onetomany(){
+
+        $user = User::find(1)->post1; 
+
+        // $email=$user->email;
+dd($user);
+// dd($email);
+
+    }
+    public function manytomany(){
+
+        $user = User::find(1)->post; 
+
+        // $email=$user->email;
+dd($user);
+// dd($email);
 
     }
 }
