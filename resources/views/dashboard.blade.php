@@ -4,6 +4,7 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+    <button id="subscribeBtn" class="btn btn-primary">Subscribe</button>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -28,3 +29,27 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+    // Get the user's ID (you can replace this with your own method)
+    var userId = <?php echo auth()->user()->id; ?>;
+    
+    // Add an event listener to the button
+    document.getElementById("subscribeBtn").addEventListener("click", function () {
+        // Send the user's ID to your controller using an AJAX request
+        // Replace 'your_controller_url' with the actual URL of your controller
+        $.ajax({
+            url: 'posts.subscribe',
+            type: 'POST',
+            data: {
+                userId: userId
+            },
+            success: function (response) {
+    dd('message recieve successfully');
+            },
+            error: function (error) {
+                // Handle errors (if any)
+                console.error(error);
+            }
+        });
+    });
+</script>

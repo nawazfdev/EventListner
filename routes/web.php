@@ -30,9 +30,11 @@ Route::middleware('auth')->group(function () {
 
 // Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
 Route::post('/posts', [PostCont::class, 'store'])->name('posts.store');
-Route::get('/onetone', [PostCont::class, 'onetoone']);
+Route::get('/onetone', [PostCont::class, 'onetoone'])->name('posts.subscribe');
 Route::get('/onetmany', [PostCont::class, 'onetomany']);
 Route::get('/manytone', [PostCont::class, 'manytomany']);
+Route::get('/subscribed', [PostCont::class, 'subscribe']);
+
 
 
 

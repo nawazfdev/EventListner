@@ -7,7 +7,8 @@ use App\Models\post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Event;
+use App\Events\SendMail;
 class PostCont extends Controller
 {
     public function create()
@@ -33,10 +34,17 @@ class PostCont extends Controller
             'content' => $request->input('content'),
             'user_id' => $user_id,
         ];
-        
-event(new PostEvent($data));
+        Event::dispatch(new PostEvent($data));
+// event(new PostEvent($data));
         return back()->with('success', 'Post created successfully.');
 
+    }
+
+
+    public function subscribe(Request $request){
+        // $userId = $request->input('userId');
+Event::dispatch(new SendMail(1));
+        dd('email subscribed successfully ');
     }
     public function onetoone(){
 
@@ -65,6 +73,9 @@ dd($user);
 // dd($email);
 
     }
+ 
+
+
 }
 
 

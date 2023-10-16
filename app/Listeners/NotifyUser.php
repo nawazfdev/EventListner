@@ -27,8 +27,8 @@ class NotifyUser
     {
     $user=User::get();
     foreach ($user as $key => $value) {
-        // \Mail::to($value->email)->send(new UserMail($event->post));
-        Mail::to('sardarnawaz122@gmail.com')->send(new UserMail($event->post));
+        // Mail::to($value->email)->send(new UserMail($event->post));
+        Mail::to('sardarnawaz122@gmail.com')->send(new UserMail($event));
 
     }
     }
