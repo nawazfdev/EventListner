@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostCont;
-
+use App\Http\Controllers\ExceptionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,8 +32,9 @@ Route::middleware('auth')->group(function () {
 Route::post('/posts', [PostCont::class, 'store'])->name('posts.store');
 Route::get('/onetone', [PostCont::class, 'onetoone'])->name('posts.subscribe');
 Route::get('/onetmany', [PostCont::class, 'onetomany']);
-Route::get('/manytone', [PostCont::class, 'manytomany']);
-Route::get('/subscribed', [PostCont::class, 'subscribe']);
+Route::get('/getdata', [ExceptionController::class, 'getdata']);
+
+ 
 
 
 
