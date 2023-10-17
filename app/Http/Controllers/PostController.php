@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Event;
 use App\Events\SendMail;
-class PostCont extends Controller
+class PostController extends Controller
 {
     public function create()
     {

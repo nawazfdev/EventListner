@@ -29,9 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 // Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-Route::post('/posts', [PostCont::class, 'store'])->name('posts.store');
-Route::get('/onetone', [PostCont::class, 'onetoone'])->name('posts.subscribe');
-Route::get('/onetmany', [PostCont::class, 'onetomany']);
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+Route::get('/onetone', [PostController::class, 'onetoone'])->name('posts.subscribe');
+Route::get('/onetmany', [PostController::class, 'onetomany']);
 Route::get('/getdata', [ExceptionController::class, 'getdata']);
 
  
@@ -47,6 +47,5 @@ Route::get('/send-email', function(){
 
 $usermail='sardarnawaz122@gmail.com';
 dispatch(new App\Jobs\sendemailjob($usermail));
-dd('send email successfully');
-
+return view('UserEmialJob');
 });
