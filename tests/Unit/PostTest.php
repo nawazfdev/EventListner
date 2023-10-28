@@ -47,4 +47,48 @@ class PostTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect('/login');
     }
+
+    public function testAuthenticatedUserCanAddPost()
+    {
+        // Create a user
+$user=User::factory()->create();
+        // Authenticate the user
+        $this->actingAs($user);
+
+        // Send a POST request to the route where you add a post
+        $response = $this->post('/posts', [
+            'title' => 'New Post',
+            'content' => 'This is the content of the new post.',
+        ]);
+
+        // Assert that the post was added successfully (e.g., check for a redirect)
+        $response->assertRedirect('/dashboard');
+
+        // Assert that the new post exists in the database
+        $this->assertDatabaseHas('posts', [
+            'title' => 'New Post',
+            'content' => 'This is the content of the new post.',
+        ]);
+    }
+
+    public function testAuthenticatedUserCanSeePostContent()
+    {
+        // Create a user
+        $user=User::factory()->create();
+
+        // Create a post
+        $post=post::factory()->create();
+        
+
+        // Authenticate the user
+        $this->actingAs($user);
+
+        // Visit a route where you can view post content (e.g., post/{id})
+        $response = $this->get('/dashboard' . $post->id);
+
+        // Assert that the user can access the post and see its content
+        $response->assertStatus(200);
+        $response->assertSeeText($post->content);
+    }
+
 }

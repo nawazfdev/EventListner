@@ -1,9 +1,13 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Product\ProductController; 
+use App\Http\Controllers\ProductDataController;
+use App\Models\post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostCont;
 use App\Http\Controllers\ExceptionController;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +24,9 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $posts = post::all();  
+
+    return view('dashboard', compact('posts'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -33,9 +39,19 @@ Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::get('/onetone', [PostController::class, 'onetoone'])->name('posts.subscribe');
 Route::get('/onetmany', [PostController::class, 'onetomany']);
 Route::get('/getdata', [ExceptionController::class, 'getdata']);
-
+Route::get('/add-product', [ProductController::class, 'addproduct']);
+//
  
 
+
+// Route::post('/product/save', [ProductDataController::class, 'saveFormData'])->name('product.save');
+
+
+ 
+ // for adding product
+Route::post('/product/save', [ProductDataController::class, 'saveProduct'])->name('product.save');
+// product discount route
+Route::post('/product/discounts', [ProductDataController::class, 'discountStore'])->name('discounts.store');
 
 
 

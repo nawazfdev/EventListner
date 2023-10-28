@@ -6,13 +6,16 @@ namespace Tests\Unit;
 use App\Models\post;
 use App\Models\User;
 use Hash;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 
 class LoginTest extends TestCase
 {
-    use RefreshDatabase;   
+    use DatabaseTransactions;
+    use WithFaker; 
     /**
      * A basic unit test example.
      */
